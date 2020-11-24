@@ -10,6 +10,9 @@ import "react-toastify/dist/ReactToastify.css"
 
 import Modal from "react-modal"
 
+import Tippy from "@tippy.js/react"
+import "tippy.js/dist/tippy.css"
+
 const CustomToast = ({ closeToast }) => {
   return (
     <div>
@@ -35,13 +38,22 @@ function App() {
 
   const [ modalIsOpen, setModalIsOpen ] = useState(false)
 
+  const ColoredTooltip = () => {
+    return <span style={{ color: "yellow" }}>Colored component</span>
+  }
+
   return (
     <IconContext.Provider value={{ color:"blue", size:"5rem"}} >
     <div className="App">
       <FaReact />
       <MdAlarm />
 
+      <hr/>
+
       <button onClick={notify}>Notify</button>
+
+      <hr/>
+
       <button onClick={() => setModalIsOpen(true)}>Open Modal</button>
 
       <Modal 
@@ -66,6 +78,27 @@ function App() {
           <button onClick={() => setModalIsOpen(false)}>Close</button>
         </div>
       </Modal>
+
+      <hr/>
+
+        <div style={{ paddingBottom: "20px"}}>
+          <Tippy content="Basic Tooltip">
+            <button>Hover</button>
+          </Tippy>
+      </div>
+
+      <div style={{ paddingBottom: "20px"}}>
+          <Tippy content={<span style={{ color: "orange"}}>Colored</span>}>
+            <button>Hover</button>
+          </Tippy>
+      </div>
+
+      <div style={{ paddingBottom: "20px"}}>
+          <Tippy content={<ColoredTooltip></ ColoredTooltip>}>
+            <button>Hover</button>
+          </Tippy>
+      </div>
+
 
     </div>
     </IconContext.Provider>
