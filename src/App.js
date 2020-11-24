@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from "react"
+import { forwardRef, useState } from "react"
 
 import { IconContext } from "react-icons"
 import { FaReact } from "react-icons/fa"
@@ -42,6 +42,15 @@ function App() {
     return <span style={{ color: "yellow" }}>Colored component</span>
   }
 
+  const CustomChild = forwardRef((props, ref) => {
+    return (
+      <div ref={ref}>
+        <div>first line</div>        
+        <div>second line</div>
+      </div>
+    )
+  })
+
   return (
     <IconContext.Provider value={{ color:"blue", size:"5rem"}} >
     <div className="App">
@@ -82,7 +91,7 @@ function App() {
       <hr/>
 
         <div style={{ paddingBottom: "20px"}}>
-          <Tippy content="Basic Tooltip">
+          <Tippy placement='right'arrow={false} delay={1000} content="Basic Tooltip">
             <button>Hover</button>
           </Tippy>
       </div>
@@ -96,6 +105,12 @@ function App() {
       <div style={{ paddingBottom: "20px"}}>
           <Tippy content={<ColoredTooltip></ ColoredTooltip>}>
             <button>Hover</button>
+          </Tippy>
+      </div>
+
+      <div style={{ paddingBottom: "20px"}}>
+          <Tippy content={<ColoredTooltip></ColoredTooltip>}>
+           <CustomChild></CustomChild>
           </Tippy>
       </div>
 
