@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from "react"
 
 import { IconContext } from "react-icons"
 import { FaReact } from "react-icons/fa"
@@ -6,6 +7,8 @@ import { MdAlarm } from "react-icons/md"
 
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+
+import Modal from "react-modal"
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -17,6 +20,7 @@ const CustomToast = ({ closeToast }) => {
 }
 
 toast.configure()
+Modal.setAppElement("#root")
 
 function App() {
 
@@ -29,6 +33,8 @@ function App() {
     toast("Basic notification", {position: toast.POSITION.BOTTOM_RIGHT})
   }
 
+  const [ modalIsOpen, setModalIsOpen ] = useState(false)
+
   return (
     <IconContext.Provider value={{ color:"blue", size:"5rem"}} >
     <div className="App">
@@ -36,6 +42,31 @@ function App() {
       <MdAlarm />
 
       <button onClick={notify}>Notify</button>
+      <button onClick={() => setModalIsOpen(true)}>Open Modal</button>
+
+      <Modal 
+        isOpen={modalIsOpen} 
+      //  shouldCloseOnOverlayClick={false} 
+        onRequestClose={() => setModalIsOpen(false)}
+        style={
+          {
+            overlay: {
+              backgroundColor: "grey"
+            },
+            content: {
+              color: "orange"
+            }
+          }
+        }
+        >
+        <h2>Modal title</h2>
+        <p>Modal body</p>
+
+        <div>
+          <button onClick={() => setModalIsOpen(false)}>Close</button>
+        </div>
+      </Modal>
+
     </div>
     </IconContext.Provider>
   );
