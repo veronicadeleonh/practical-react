@@ -14,6 +14,7 @@ import Tippy from "@tippy.js/react"
 import "tippy.js/dist/tippy.css"
 
 import CountUp, { useCountUp } from "react-countup"
+import IdleTimerContainer from './components/IdleTimerContainer';
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -102,7 +103,7 @@ function App() {
 
       <div style={{ paddingBottom: "20px" }}>
           <Tippy content={<span style={{ color: "orange"}}>Colored</span>}>
-            <button>Ho≤ver</button>
+            <button>Hover</button>
           </Tippy>
       </div>
 
@@ -136,6 +137,9 @@ function App() {
       <br/>
       <h1><CountUp end={1000} duration={10} suffix='USD' decimals={2}/></h1>
 
+      <hr/>
+
+      <IdleTimerContainer></IdleTimerContainer>
     </div>
     </IconContext.Provider>
   );
