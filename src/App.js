@@ -13,6 +13,8 @@ import Modal from "react-modal"
 import Tippy from "@tippy.js/react"
 import "tippy.js/dist/tippy.css"
 
+import CountUp, { useCountUp } from "react-countup"
+
 const CustomToast = ({ closeToast }) => {
   return (
     <div>
@@ -50,6 +52,8 @@ function App() {
       </div>
     )
   })
+
+  const { countUp, start, pauseResume, reset, update } = useCountUp({ dureation: 5, end: 1000, startOnMount: false})
 
   return (
     <IconContext.Provider value={{ color:"blue", size:"5rem"}} >
@@ -90,30 +94,47 @@ function App() {
 
       <hr/>
 
-        <div style={{ paddingBottom: "20px"}}>
+        <div style={{ paddingBottom: "20px" }}>
           <Tippy placement='right'arrow={false} delay={1000} content="Basic Tooltip">
             <button>Hover</button>
           </Tippy>
       </div>
 
-      <div style={{ paddingBottom: "20px"}}>
+      <div style={{ paddingBottom: "20px" }}>
           <Tippy content={<span style={{ color: "orange"}}>Colored</span>}>
-            <button>Hover</button>
+            <button>Ho≤ver</button>
           </Tippy>
       </div>
 
-      <div style={{ paddingBottom: "20px"}}>
+      <div style={{ paddingBottom: "20px" }}>
           <Tippy content={<ColoredTooltip></ ColoredTooltip>}>
             <button>Hover</button>
           </Tippy>
       </div>
 
-      <div style={{ paddingBottom: "20px"}}>
+      <div style={{ paddingBottom: "20px" }}>
           <Tippy content={<ColoredTooltip></ColoredTooltip>}>
            <CustomChild></CustomChild>
           </Tippy>
       </div>
 
+      <hr/>
+
+      <div>
+        <h1>{countUp}</h1>
+        <button onClick={start}>Start</button>
+        <button onClick={reset}>Reset</button>
+        <button onClick={pauseResume}>Pause / Resume</button>
+        <button onClick={() => update(2000)}>Update to 2000</button>
+      </div>
+
+      <h1><CountUp end={200}/></h1>
+      <br/>
+      <h1><CountUp end={200} duration={5}/></h1>
+      <br/>
+      <h1><CountUp start={500} end={1000} duration={5} prefix='$' decimals={2}/></h1>
+      <br/>
+      <h1><CountUp end={1000} duration={10} suffix='USD' decimals={2}/></h1>
 
     </div>
     </IconContext.Provider>
