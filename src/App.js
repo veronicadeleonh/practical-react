@@ -1,4 +1,5 @@
 import './App.css';
+
 import { forwardRef, useState } from "react"
 
 import { IconContext } from "react-icons"
@@ -15,6 +16,8 @@ import "tippy.js/dist/tippy.css"
 
 import CountUp, { useCountUp } from "react-countup"
 import IdleTimerContainer from './components/IdleTimerContainer';
+
+import { ChromePicker } from "react-color"
 
 const CustomToast = ({ closeToast }) => {
   return (
@@ -55,6 +58,9 @@ function App() {
   })
 
   const { countUp, start, pauseResume, reset, update } = useCountUp({ dureation: 5, end: 1000, startOnMount: false})
+
+  const [color, setColor] = useState("#fff")
+  const [showColorPicker, setShowColorPicker] = useState(false)
 
   return (
     <IconContext.Provider value={{ color:"blue", size:"5rem"}} >
@@ -140,6 +146,19 @@ function App() {
       <hr/>
 
       <IdleTimerContainer></IdleTimerContainer>
+
+      <hr/>
+      <button 
+        onClick={() => setShowColorPicker(showColorPicker => !showColorPicker)}
+        >
+          {showColorPicker ? "Close color picker" : "Pick a color"}
+      </button>
+      {showColorPicker && (
+        <ChromePicker 
+          color={color} 
+          onChange={updatedColor => setColor(updatedColor.hex)}/>)}
+      
+      <h2>You picked {color}</h2>
     </div>
     </IconContext.Provider>
   );
